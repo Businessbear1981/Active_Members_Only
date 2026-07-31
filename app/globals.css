@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:          #0a0a0a;
+  --text:        #f5f0e8;
+  --accent:      #C9A84C;
+  --accent-glow: rgba(201, 168, 76, 0.4);
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Georgia, Cambria, serif;
+  scroll-behavior: smooth;
+}
+
+/* Brass text */
+.brass { color: var(--accent); }
+
+/* Brass glow on hover */
+.brass-glow:hover {
+  text-shadow: 0 0 18px var(--accent-glow);
+}
+
+/* Subtle grain texture */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px;
+  z-index: 9999;
+}
+
+/* Hero overlay gradient */
+.hero-overlay {
+  background: linear-gradient(to bottom,
+    rgba(10,10,10,0.3) 0%,
+    rgba(10,10,10,0.6) 60%,
+    rgba(10,10,10,0.95) 100%
+  );
+}
+
+/* Gate card */
+.gate-card {
+  background: rgba(20,20,20,0.85);
+  border: 1px solid rgba(201,168,76,0.2);
+  backdrop-filter: blur(12px);
+}
+
+/* Tombstone (piece label) */
+.tombstone {
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+}

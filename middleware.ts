@@ -20,7 +20,13 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  let user = null
+  try {
+    const { data } = await supabase.auth.getUser()
+    user = data.user
+  } catch {
+    user = null
+  }
 
   // Gate: /provenance requires signed-in user with signed_at set in profile
   if (request.nextUrl.pathname.startsWith('/provenance')) {
@@ -36,9 +42,23 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Streets: requires a signed-in member (premium+ tier check lands once subscriptions are wired to Supabase)
+  if (request.nextUrl.pathname.startsWith('/streets')) {
+    if (!user) {
+      return NextResponse.redirect(new URL('/gate/signed', request.url))
+    }
+  }
+
+  // VIP Sanctum: requires a signed-in member (vip/label_signed tier check lands once subscriptions are wired to Supabase)
+  if (request.nextUrl.pathname.startsWith('/vip')) {
+    if (!user) {
+      return NextResponse.redirect(new URL('/gate/signed', request.url))
+    }
+  }
+
   return supabaseResponse
 }
 
 export const config = {
-  matcher: ['/provenance/:path*', '/admin/:path*'],
+  matcher: ['/provenance/:path*', '/admin/:path*', '/streets/:path*', '/vip/:path*'],
 }

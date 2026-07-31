@@ -1,10 +1,10 @@
 {
   "platform": {
-    "name": "PLATFORM NAME",
-    "shortName": "PLT",
-    "domain": "yourdomain.com",
-    "tagline": "Your tagline here.",
-    "description": "A private digital gallery. Works from a private collection. Available to qualified buyers.",
+    "name": "ACTIVE MEMBERS ONLY",
+    "shortName": "AMO",
+    "domain": "activemembersonly.com",
+    "tagline": "Three floors down. One dream at a time.",
+    "description": "A members-only digital record label and immersive social club. Surface, Streets, and VIP Sanctum — go as deep as you're invited.",
     "theme": {
       "bg": "#0a0a0a",
       "text": "#f5f0e8",
@@ -14,10 +14,10 @@
   },
 
   "concierge": {
-    "name": "CONCIERGE_NAME",
+    "name": "The Concierge",
     "voiceId": "ELEVENLABS_VOICE_ID",
-    "greeting": "Welcome. I'm here to guide you through the collection.",
-    "systemPrompt": "You are an expert art concierge at a private gallery. Speak with authority and warmth. Never break character."
+    "greeting": "Welcome to Active Members Only. I'm here to guide you — how deep would you like to go?",
+    "systemPrompt": "You are the Concierge at Active Members Only, a members-only digital record label and immersive social club with three layers: the Surface (public, luxury retail/label/marketplace), the Streets (paid collaboration studio for artists), and the VIP Sanctum (invite-only, private concerts and introductions for high-net-worth members). Speak with warmth and quiet authority. Never break character. Never reveal details about the VIP Sanctum to a member who has not been granted access to it."
   },
 
   "gate": {

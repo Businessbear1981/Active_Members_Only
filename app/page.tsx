@@ -16,6 +16,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-3">
           <p className="text-xs tracking-[0.4em] uppercase brass opacity-80">{platform.shortName}</p>
           <h1 className="text-4xl md:text-6xl font-serif tracking-wide">{platform.name}</h1>
+          <p className="text-[11px] tracking-[0.5em] uppercase text-brass/70 font-mono">EST. MMXXVI</p>
           <p className="text-sm tracking-widest uppercase text-ivory/60 max-w-sm">{platform.tagline}</p>
         </div>
 

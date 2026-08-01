@@ -7,12 +7,13 @@ export default function StreetsPage() {
   return (
     <main className="min-h-screen bg-streets-bg px-6 py-20">
       <div className="max-w-2xl mx-auto flex flex-col items-center text-center gap-6 mb-14">
-        <p className="text-xs tracking-[0.4em] uppercase text-streets-cyan opacity-80">THE STREETS</p>
+        <p className="text-xs tracking-[0.4em] uppercase text-streets-cyan opacity-80">THE STREETS · THE LABEL</p>
         <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white">
           The Collaboration Studio
         </h1>
         <p className="text-sm text-ivory/60 max-w-md">
-          Genre rooms, project rooms, the arranger, the label pipeline. This is where the work happens.
+          Genre rooms, project rooms, the arranger, the roster, the contracts, the release pipeline.
+          This is the label. This is where the work happens.
         </p>
       </div>
 

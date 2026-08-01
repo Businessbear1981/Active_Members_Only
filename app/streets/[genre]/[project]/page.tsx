@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getSpace } from '@/lib/config'
 import Arranger from '@/components/streets/Arranger'
+import Collaborators from '@/components/streets/Collaborators'
+import ProjectAssets from '@/components/streets/ProjectAssets'
 
 export default async function ProjectRoomPage({
   params,
@@ -20,11 +22,22 @@ export default async function ProjectRoomPage({
         <p className="text-sm text-ivory/60 max-w-md mt-4">{space.tagline}</p>
       </div>
 
-      <div className="max-w-3xl mx-auto">
-        <Arranger />
+      <div className="max-w-3xl mx-auto flex flex-col gap-10">
+        <section>
+          <p className="text-[11px] tracking-widest uppercase text-ivory/40 mb-3">Arranger</p>
+          <Arranger />
+        </section>
+
+        <section className="border border-white/10 rounded p-5 bg-black/10">
+          <Collaborators />
+        </section>
+
+        <section className="border border-white/10 rounded p-5 bg-black/10">
+          <ProjectAssets />
+        </section>
       </div>
 
-      <div className="text-center mt-10">
+      <div className="text-center mt-14">
         <Link
           href={`/streets/${genre}`}
           className="text-xs tracking-widest uppercase text-ivory/40 hover:text-streets-cyan transition-colors"

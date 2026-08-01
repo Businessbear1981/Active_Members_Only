@@ -9,7 +9,7 @@ import {
 } from '@dnd-kit/core'
 import { motion } from 'framer-motion'
 
-interface LibraryItem {
+export interface LibraryItem {
   id: string
   label: string
   color: string
@@ -124,8 +124,17 @@ function TrackLane({
   )
 }
 
-export default function Arranger() {
+export default function Arranger({ injectedItems }: { injectedItems?: LibraryItem[] }) {
   const [library, setLibrary] = useState<LibraryItem[]>(DEMO_LIBRARY)
+
+  useEffect(() => {
+    if (!injectedItems?.length) return
+    setLibrary(prev => {
+      const existingIds = new Set(prev.map(i => i.id))
+      const toAdd = injectedItems.filter(i => !existingIds.has(i.id))
+      return toAdd.length ? [...prev, ...toAdd] : prev
+    })
+  }, [injectedItems])
   const [tracks, setTracks] = useState<Track[]>(INITIAL_TRACKS)
   const [isPlaying, setIsPlaying] = useState(false)
   const [playKey, setPlayKey] = useState(0)

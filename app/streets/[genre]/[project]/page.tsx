@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getSpace } from '@/lib/config'
-import Arranger from '@/components/streets/Arranger'
+import ProjectWorkspace from '@/components/streets/ProjectWorkspace'
 import Collaborators from '@/components/streets/Collaborators'
 import ProjectAssets from '@/components/streets/ProjectAssets'
 import ReleasePipeline from '@/components/streets/ReleasePipeline'
@@ -24,10 +24,7 @@ export default async function ProjectRoomPage({
       </div>
 
       <div className="max-w-3xl mx-auto flex flex-col gap-10">
-        <section>
-          <p className="text-[11px] tracking-widest uppercase text-ivory/40 mb-3">Arranger</p>
-          <Arranger />
-        </section>
+        <ProjectWorkspace />
 
         <section className="border border-white/10 rounded p-5 bg-black/10">
           <Collaborators />

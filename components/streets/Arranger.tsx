@@ -139,13 +139,9 @@ export default function Arranger({ injectedItems }: { injectedItems?: LibraryIte
   const [isPlaying, setIsPlaying] = useState(false)
   const [playKey, setPlayKey] = useState(0)
   const [playingClipId, setPlayingClipId] = useState<string | null>(null)
-  const [isRecording, setIsRecording] = useState(false)
-  const [recordError, setRecordError] = useState('')
   const idRef = useRef(0)
   const uid = useId()
   const audioRef = useRef<HTMLAudioElement | null>(null)
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
-  const chunksRef = useRef<Blob[]>([])
 
   useEffect(() => {
     const audio = new Audio()
@@ -212,62 +208,17 @@ export default function Arranger({ injectedItems }: { injectedItems?: LibraryIte
     e.target.value = ''
   }
 
-  async function toggleRecording() {
-    setRecordError('')
-    if (isRecording) {
-      mediaRecorderRef.current?.stop()
-      setIsRecording(false)
-      return
-    }
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const recorder = new MediaRecorder(stream)
-      chunksRef.current = []
-      recorder.ondataavailable = e => chunksRef.current.push(e.data)
-      recorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: 'audio/webm' })
-        const url = URL.createObjectURL(blob)
-        setLibrary(prev => [
-          ...prev,
-          {
-            id: `rec-${Date.now()}`,
-            label: `Recording — ${new Date().toLocaleTimeString()}`,
-            color: 'bg-red-500/70',
-            url,
-          },
-        ])
-        stream.getTracks().forEach(t => t.stop())
-      }
-      mediaRecorderRef.current = recorder
-      recorder.start()
-      setIsRecording(true)
-    } catch {
-      setRecordError('Microphone access denied or unavailable.')
-    }
-  }
-
   const totalClips = tracks.reduce((sum, t) => sum + t.clips.length, 0)
 
   return (
     <div className="w-full text-left">
       <DndContext onDragEnd={handleDragEnd}>
-        {/* Capture real audio */}
+        {/* Import real audio — live recording now lives in the Recording Spaces panel */}
         <div className="flex items-center gap-3 mb-4">
           <label className="px-4 py-2 border border-emerald-500/60 text-emerald-400 text-xs tracking-widest uppercase hover:bg-emerald-500/10 transition-colors cursor-pointer">
             Upload Audio
             <input type="file" accept="audio/*" onChange={handleUpload} className="hidden" />
           </label>
-          <button
-            onClick={toggleRecording}
-            className={`px-4 py-2 border text-xs tracking-widest uppercase transition-colors ${
-              isRecording
-                ? 'border-red-500 text-red-400 bg-red-500/10'
-                : 'border-red-500/60 text-red-400 hover:bg-red-500/10'
-            }`}
-          >
-            {isRecording ? '● Stop Recording' : '● Record'}
-          </button>
-          {recordError && <p className="text-red-400 text-xs">{recordError}</p>}
         </div>
 
         {/* Library */}
@@ -324,8 +275,9 @@ export default function Arranger({ injectedItems }: { injectedItems?: LibraryIte
       </DndContext>
 
       <p className="text-ivory/20 text-[11px] mt-4">
-        Upload and Record are real — click a placed clip with a ● to actually hear it. Nothing
-        persists to a server yet (local to this browser tab only); that needs Supabase Storage wired in.
+        Upload is real, and anything captured in the Recording Spaces panel below flows in here too —
+        click a placed clip with a ● to actually hear it. Nothing persists to a server yet (local to
+        this browser tab only); that needs Supabase Storage wired in.
       </p>
     </div>
   )

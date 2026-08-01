@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Arranger, { type LibraryItem } from '@/components/streets/Arranger'
 import SampleSearch from '@/components/streets/SampleSearch'
+import RecordingSpaces from '@/components/streets/RecordingSpaces'
 
 export default function ProjectWorkspace() {
   const [injectedItems, setInjectedItems] = useState<LibraryItem[]>([])
@@ -14,11 +15,15 @@ export default function ProjectWorkspace() {
   return (
     <div className="flex flex-col gap-10">
       <section className="border border-white/10 rounded p-5 bg-black/10">
+        <RecordingSpaces onAdd={handleAdd} />
+      </section>
+
+      <section className="border border-white/10 rounded p-5 bg-black/10">
         <SampleSearch onAdd={handleAdd} />
       </section>
 
       <section>
-        <p className="text-[11px] tracking-widest uppercase text-ivory/40 mb-3">Arranger</p>
+        <p className="text-[11px] tracking-widest uppercase text-ivory/40 mb-3">Engineering Room — Arranger</p>
         <Arranger injectedItems={injectedItems} />
       </section>
     </div>

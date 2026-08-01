@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useId } from 'react'
+import { useState, useRef, useId, useEffect } from 'react'
 import {
   DndContext,
   useDraggable,
@@ -13,12 +13,14 @@ interface LibraryItem {
   id: string
   label: string
   color: string
+  url?: string
 }
 
 interface PlacedClip {
   id: string
   label: string
   color: string
+  url?: string
 }
 
 interface Track {
@@ -27,7 +29,7 @@ interface Track {
   clips: PlacedClip[]
 }
 
-const LIBRARY: LibraryItem[] = [
+const DEMO_LIBRARY: LibraryItem[] = [
   { id: 'lib-808', label: '808 Kick Loop', color: 'bg-streets-purple/70' },
   { id: 'lib-hats', label: 'Hi-Hat Pattern', color: 'bg-streets-purple/70' },
   { id: 'lib-hook', label: 'Vocal Hook', color: 'bg-streets-cyan/70' },
@@ -59,8 +61,9 @@ function LibraryChip({ item }: { item: LibraryItem }) {
           ? { transform: `translate(${transform.x}px, ${transform.y}px)` }
           : undefined
       }
-      className={`${item.color} ${isDragging ? 'opacity-40' : 'opacity-100'} px-3 py-2 rounded text-xs text-white font-medium text-left cursor-grab active:cursor-grabbing select-none whitespace-nowrap`}
+      className={`${item.color} ${isDragging ? 'opacity-40' : 'opacity-100'} px-3 py-2 rounded text-xs text-white font-medium text-left cursor-grab active:cursor-grabbing select-none whitespace-nowrap flex items-center gap-1`}
     >
+      {item.url && <span title="Real audio">●</span>}
       {item.label}
     </button>
   )
@@ -69,9 +72,13 @@ function LibraryChip({ item }: { item: LibraryItem }) {
 function TrackLane({
   track,
   onRemoveClip,
+  onPlayClip,
+  playingClipId,
 }: {
   track: Track
   onRemoveClip: (trackId: string, clipId: string) => void
+  onPlayClip: (clip: PlacedClip) => void
+  playingClipId: string | null
 }) {
   const { setNodeRef, isOver } = useDroppable({
     id: `track-${track.id}`,
@@ -93,11 +100,18 @@ function TrackLane({
         {track.clips.map(clip => (
           <div
             key={clip.id}
-            className={`${clip.color} px-3 py-2 rounded text-xs text-white font-medium flex items-center gap-2`}
+            onClick={() => clip.url && onPlayClip(clip)}
+            className={`${clip.color} px-3 py-2 rounded text-xs text-white font-medium flex items-center gap-2 ${
+              clip.url ? 'cursor-pointer' : ''
+            } ${playingClipId === clip.id ? 'ring-2 ring-white' : ''}`}
           >
+            {clip.url && <span>{playingClipId === clip.id ? '⏸' : '▶'}</span>}
             {clip.label}
             <button
-              onClick={() => onRemoveClip(track.id, clip.id)}
+              onClick={e => {
+                e.stopPropagation()
+                onRemoveClip(track.id, clip.id)
+              }}
               className="text-white/70 hover:text-white"
               aria-label={`Remove ${clip.label}`}
             >
@@ -111,11 +125,29 @@ function TrackLane({
 }
 
 export default function Arranger() {
+  const [library, setLibrary] = useState<LibraryItem[]>(DEMO_LIBRARY)
   const [tracks, setTracks] = useState<Track[]>(INITIAL_TRACKS)
   const [isPlaying, setIsPlaying] = useState(false)
   const [playKey, setPlayKey] = useState(0)
+  const [playingClipId, setPlayingClipId] = useState<string | null>(null)
+  const [isRecording, setIsRecording] = useState(false)
+  const [recordError, setRecordError] = useState('')
   const idRef = useRef(0)
   const uid = useId()
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const chunksRef = useRef<Blob[]>([])
+
+  useEffect(() => {
+    const audio = new Audio()
+    audioRef.current = audio
+    const onEnded = () => setPlayingClipId(null)
+    audio.addEventListener('ended', onEnded)
+    return () => {
+      audio.removeEventListener('ended', onEnded)
+      audio.pause()
+    }
+  }, [])
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
@@ -130,6 +162,7 @@ export default function Arranger() {
       id: `${uid}-${idRef.current}`,
       label: libItem.label,
       color: libItem.color,
+      url: libItem.url,
     }
 
     setTracks(prev =>
@@ -147,18 +180,94 @@ export default function Arranger() {
     )
   }
 
+  function playClip(clip: PlacedClip) {
+    if (!clip.url || !audioRef.current) return
+    if (playingClipId === clip.id) {
+      audioRef.current.pause()
+      setPlayingClipId(null)
+      return
+    }
+    audioRef.current.src = clip.url
+    audioRef.current.play()
+    setPlayingClipId(clip.id)
+  }
+
+  function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const url = URL.createObjectURL(file)
+    setLibrary(prev => [
+      ...prev,
+      { id: `upload-${Date.now()}`, label: file.name, color: 'bg-emerald-500/70', url },
+    ])
+    e.target.value = ''
+  }
+
+  async function toggleRecording() {
+    setRecordError('')
+    if (isRecording) {
+      mediaRecorderRef.current?.stop()
+      setIsRecording(false)
+      return
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      const recorder = new MediaRecorder(stream)
+      chunksRef.current = []
+      recorder.ondataavailable = e => chunksRef.current.push(e.data)
+      recorder.onstop = () => {
+        const blob = new Blob(chunksRef.current, { type: 'audio/webm' })
+        const url = URL.createObjectURL(blob)
+        setLibrary(prev => [
+          ...prev,
+          {
+            id: `rec-${Date.now()}`,
+            label: `Recording — ${new Date().toLocaleTimeString()}`,
+            color: 'bg-red-500/70',
+            url,
+          },
+        ])
+        stream.getTracks().forEach(t => t.stop())
+      }
+      mediaRecorderRef.current = recorder
+      recorder.start()
+      setIsRecording(true)
+    } catch {
+      setRecordError('Microphone access denied or unavailable.')
+    }
+  }
+
   const totalClips = tracks.reduce((sum, t) => sum + t.clips.length, 0)
 
   return (
     <div className="w-full text-left">
       <DndContext onDragEnd={handleDragEnd}>
+        {/* Capture real audio */}
+        <div className="flex items-center gap-3 mb-4">
+          <label className="px-4 py-2 border border-emerald-500/60 text-emerald-400 text-xs tracking-widest uppercase hover:bg-emerald-500/10 transition-colors cursor-pointer">
+            Upload Audio
+            <input type="file" accept="audio/*" onChange={handleUpload} className="hidden" />
+          </label>
+          <button
+            onClick={toggleRecording}
+            className={`px-4 py-2 border text-xs tracking-widest uppercase transition-colors ${
+              isRecording
+                ? 'border-red-500 text-red-400 bg-red-500/10'
+                : 'border-red-500/60 text-red-400 hover:bg-red-500/10'
+            }`}
+          >
+            {isRecording ? '● Stop Recording' : '● Record'}
+          </button>
+          {recordError && <p className="text-red-400 text-xs">{recordError}</p>}
+        </div>
+
         {/* Library */}
         <div className="mb-6">
           <p className="text-[11px] tracking-widest uppercase text-ivory/40 mb-2">
-            Asset Library — drag onto a track
+            Asset Library — drag onto a track (● = real playable audio)
           </p>
           <div className="flex gap-2 flex-wrap">
-            {LIBRARY.map(item => (
+            {library.map(item => (
               <LibraryChip key={item.id} item={item} />
             ))}
           </div>
@@ -193,15 +302,21 @@ export default function Arranger() {
           )}
           <div className="flex flex-col gap-3">
             {tracks.map(track => (
-              <TrackLane key={track.id} track={track} onRemoveClip={removeClip} />
+              <TrackLane
+                key={track.id}
+                track={track}
+                onRemoveClip={removeClip}
+                onPlayClip={playClip}
+                playingClipId={playingClipId}
+              />
             ))}
           </div>
         </div>
       </DndContext>
 
       <p className="text-ivory/20 text-[11px] mt-4">
-        Arrangement mechanics are fully live — drag, drop, remove, reorder-by-track. Audio playback
-        is silent for now; real audio needs sample files wired through Supabase Storage.
+        Upload and Record are real — click a placed clip with a ● to actually hear it. Nothing
+        persists to a server yet (local to this browser tab only); that needs Supabase Storage wired in.
       </p>
     </div>
   )

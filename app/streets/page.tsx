@@ -17,6 +17,15 @@ export default function StreetsPage() {
         </p>
       </div>
 
+      <div className="max-w-2xl mx-auto flex justify-center mb-8">
+        <Link
+          href="/streets/roster"
+          className="px-6 py-3 border border-streets-cyan/50 text-streets-cyan text-xs tracking-widest uppercase hover:bg-streets-cyan/10 transition-colors"
+        >
+          Artist Roster →
+        </Link>
+      </div>
+
       <div className="max-w-2xl mx-auto grid grid-cols-1 gap-4">
         {genreRooms.map(room => (
           <Link

@@ -4,6 +4,7 @@ import { getSpace } from '@/lib/config'
 import Arranger from '@/components/streets/Arranger'
 import Collaborators from '@/components/streets/Collaborators'
 import ProjectAssets from '@/components/streets/ProjectAssets'
+import ReleasePipeline from '@/components/streets/ReleasePipeline'
 
 export default async function ProjectRoomPage({
   params,
@@ -34,6 +35,10 @@ export default async function ProjectRoomPage({
 
         <section className="border border-white/10 rounded p-5 bg-black/10">
           <ProjectAssets />
+        </section>
+
+        <section className="border border-white/10 rounded p-5 bg-black/10">
+          <ReleasePipeline />
         </section>
       </div>
 

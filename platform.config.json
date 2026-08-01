@@ -21,9 +21,9 @@
   },
 
   "gate": {
-    "documentName": "NDA",
-    "documentLabel": "Non-Disclosure Agreement",
-    "roles": ["buyer", "lender", "broker"]
+    "documentName": "Membership Agreement",
+    "documentLabel": "Active Members Only — Membership Agreement",
+    "roles": ["premium", "vip"]
   },
 
   "accessTiers": {

@@ -5,10 +5,9 @@ import { useParams } from 'next/navigation'
 import { gate } from '@/lib/config'
 
 const ROLE_LABELS: Record<string, string> = {
-  signed: 'NDA — Standard Access',
-  buyer:  'Qualified Buyer',
-  lender: 'Lender',
-  broker: 'Broker-Dealer',
+  signed:  'Membership Access',
+  premium: 'Premium Membership',
+  vip:     'VIP Sanctum Invitation',
 }
 
 export default function GatePage() {

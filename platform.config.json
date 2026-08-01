@@ -93,5 +93,27 @@
     "home":       { "heroImage": "/brand/hero.jpg" },
     "collection": { "heroImage": "/brand/collection-hero.jpg" },
     "wing":       { "heroImage": "/brand/wing-hero.jpg" }
-  }
+  },
+
+  "spaces": [
+    { "slug": "lab",          "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Lab",         "tagline": "Upload beats. Real-time waveform editor. Trending leaderboard.", "status": "coming-soon" },
+    { "slug": "marketplace",  "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Marketplace", "tagline": "Digital + physical merch, stems, presets, the label store.",     "status": "live" },
+    { "slug": "club",         "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Club",       "tagline": "Public matching and discovery.",                                "status": "coming-soon" },
+    { "slug": "lounge",       "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Lounge",     "tagline": "Activity feed, direct messages, connections.",                  "status": "coming-soon" },
+    { "slug": "restaurant",   "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Restaurant", "tagline": "Digital dining. Scope still being defined.",                    "status": "coming-soon" },
+
+    { "slug": "hip-hop",             "parentSlug": null,      "tier": "streets", "spaceType": "wing", "title": "Hip-Hop",              "tagline": "Genre room. Project rooms nested inside.",         "status": "live" },
+    { "slug": "midnight-sessions",   "parentSlug": "hip-hop", "tier": "streets", "spaceType": "room", "title": "Midnight Sessions",    "tagline": "Project room — arranger, assets, A&R pipeline.",   "status": "live" },
+
+    { "slug": "audio-room",    "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "Audio Room",          "tagline": "Highest-quality webcasting audio for private concerts.",          "status": "live" },
+    { "slug": "video-room",    "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "Video Room",          "tagline": "Webcasting video for private concerts.",                          "status": "live" },
+    { "slug": "the-venue",     "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "The Venue",           "tagline": "Digital music venue. Private concerts, up to 100K live.",         "status": "live" },
+    { "slug": "the-auction",   "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "The Auction",         "tagline": "Ultra-high-net-worth auction house for rare drops and access.",   "status": "live" },
+    { "slug": "private-vault", "parentSlug": null, "tier": "vip", "spaceType": "vault",     "title": "Private Vaults",      "tagline": "One vault per signed artist or VIP member.",                      "status": "live" },
+    { "slug": "boardroom",     "parentSlug": null, "tier": "vip", "spaceType": "boardroom", "title": "Boardroom",           "tagline": "Deal terms, revenue share, bespoke booking.",                     "status": "live" },
+    { "slug": "release-room",  "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "Release Room",        "tagline": "Limited drops, distribution status.",                             "status": "live" },
+    { "slug": "sample-vault",  "parentSlug": null, "tier": "vip", "spaceType": "vault",     "title": "Exclusive Sample Vault", "tagline": "Sample packs from major producers.",                          "status": "live" },
+    { "slug": "art-portal",    "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "Art / Portal Room",   "tagline": "The rotating art mechanic from HALO/NVAI, as its own room.",     "status": "live" },
+    { "slug": "the-circle",    "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "The Circle",          "tagline": "Private introductions. One candidate at a time.",                 "status": "live" }
+  ]
 }

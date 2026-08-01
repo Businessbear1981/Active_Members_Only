@@ -1,5 +1,19 @@
 export type AccessTier = 'public' | 'signed' | 'buyer' | 'lender' | 'broker'
 
+export type Tier = 'surface' | 'streets' | 'vip'
+export type SpaceType = 'wing' | 'room' | 'vault' | 'boardroom'
+export type SpaceStatus = 'live' | 'coming-soon'
+
+export interface Space {
+  slug: string
+  parentSlug: string | null
+  tier: Tier
+  spaceType: SpaceType
+  title: string
+  tagline: string
+  status: SpaceStatus
+}
+
 export interface Artist {
   slug: string
   name: string
@@ -81,4 +95,5 @@ export interface PlatformConfig {
   artists: Artist[]
   pieces: Piece[]
   rooms: Record<string, Room>
+  spaces: Space[]
 }

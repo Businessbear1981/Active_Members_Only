@@ -1,5 +1,5 @@
 import { createServiceClient } from '@/utils/supabase/server'
-import { pieces, artists } from '@/lib/config'
+import { spaces } from '@/lib/config'
 
 export const metadata = { title: 'Admin' }
 
@@ -16,7 +16,7 @@ export default async function AdminPage() {
       <div className="max-w-4xl mx-auto">
 
         <h1 className="font-serif text-3xl mb-2">Admin</h1>
-        <p className="text-ivory/40 text-sm mb-12">{pieces.length} pieces · {artists.length} artists</p>
+        <p className="text-ivory/40 text-sm mb-12">{spaces.length} spaces across Surface, Streets, and VIP</p>
 
         <h2 className="text-xs tracking-widest uppercase brass mb-6">Gate Requests</h2>
 

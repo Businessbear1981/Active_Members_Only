@@ -34,60 +34,9 @@
     "broker":   { "label": "Broker-Dealer",  "sees": ["floorPrice", "commission", "ownerOfRecord"] }
   },
 
-  "artists": [
-    {
-      "slug": "artist-slug",
-      "name": "Artist Full Name",
-      "shortName": "A. Name",
-      "era": "20th Century",
-      "nationality": "French",
-      "born": 1900,
-      "died": 1980,
-      "wingHref": "/wing/artist-slug",
-      "pieceCount": 30,
-      "bio": "Replace with artist biography.",
-      "conciergeStory": "What the concierge says when introducing this artist and their significance."
-    }
-  ],
+  "artists": [],
 
-  "pieces": [
-    {
-      "slug": "piece-001",
-      "artistSlug": "artist-slug",
-      "title": "Piece Title",
-      "year": "c. 1940",
-      "medium": "Oil on canvas",
-      "dimensions": "80 × 65 cm",
-      "signed": true,
-      "heroImage": "/paintings/piece-001.jpg",
-      "viewingLocation": "Room 1, East Wall",
-      "conciergeStory": "Extended narrative the concierge speaks at this piece.",
-      "literature": [],
-      "provenanceDoc": "/provenance/piece-001.pdf",
-      "comparisonImages": [],
-      "gated": {
-        "signed": {
-          "ownerChain": "",
-          "authPdf": "",
-          "conditionPhotos": []
-        },
-        "buyer": {
-          "askingPrice": 0,
-          "paymentStructure": ""
-        },
-        "lender": {
-          "appraisalValue": 0,
-          "fmv": 0,
-          "insuranceStatus": ""
-        },
-        "broker": {
-          "floorPrice": 0,
-          "commission": "",
-          "ownerOfRecord": ""
-        }
-      }
-    }
-  ],
+  "pieces": [],
 
   "rooms": {
     "home":       { "heroImage": "/brand/hero.jpg" },

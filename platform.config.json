@@ -45,9 +45,9 @@
   },
 
   "spaces": [
-    { "slug": "lab",          "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Lab",         "tagline": "Upload beats. Real-time waveform editor. Trending leaderboard.", "status": "coming-soon" },
+    { "slug": "lab",          "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Lab",         "tagline": "Upload beats. Real-time waveform editor. Trending leaderboard.", "status": "live" },
     { "slug": "marketplace",  "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Marketplace", "tagline": "Digital + physical merch, stems, presets, the label store.",     "status": "live" },
-    { "slug": "club",         "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Club",       "tagline": "Public matching and discovery.",                                "status": "coming-soon" },
+    { "slug": "club",         "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Club",       "tagline": "Public matching and discovery.",                                "status": "live" },
     { "slug": "lounge",       "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Lounge",     "tagline": "Activity feed, direct messages, connections.",                  "status": "coming-soon" },
     { "slug": "restaurant",   "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Restaurant", "tagline": "Digital dining. Scope still being defined.",                    "status": "coming-soon" },
 

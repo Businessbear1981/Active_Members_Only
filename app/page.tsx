@@ -1,6 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { platform } from '@/lib/config'
-import Silhouette from '@/components/ui/Silhouette'
 
 export default function Home() {
   return (
@@ -9,8 +9,16 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">
 
-        {/* Silhouette — placeholder until SCO's likeness is provided */}
-        <Silhouette />
+        {/* SCO bust — framed like a museum object under glass */}
+        <div className="relative w-56 sm:w-72 aspect-square border border-brass/40 shadow-[0_0_60px_rgba(201,168,76,0.15)]">
+          <Image
+            src="/brand/sco-bust.jpg"
+            alt="SCO"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
 
         {/* Brand */}
         <div className="flex flex-col items-center gap-3">

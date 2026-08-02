@@ -14,7 +14,7 @@ export default function ArtPortalPage() {
         </p>
       </div>
 
-      <RotatingGallery />
+      <RotatingGallery seedImage="/brand/vip/art-portal.jpg" seedName="Art / Portal Room — concept" />
 
       <div className="text-center mt-14">
         <Link

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { getSpacesByTier } from '@/lib/config'
 
@@ -6,6 +7,12 @@ export default function StreetsPage() {
 
   return (
     <main className="min-h-screen bg-streets-bg px-6 py-20">
+      <div className="max-w-3xl mx-auto mb-10">
+        <div className="relative w-full aspect-[16/9] border border-streets-purple/40 overflow-hidden">
+          <Image src="/brand/streets-hero.jpg" alt="The Streets" fill className="object-cover" priority />
+        </div>
+      </div>
+
       <div className="max-w-2xl mx-auto flex flex-col items-center text-center gap-6 mb-14">
         <p className="text-xs tracking-[0.4em] uppercase text-streets-cyan opacity-80">THE STREETS · THE LABEL</p>
         <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white">

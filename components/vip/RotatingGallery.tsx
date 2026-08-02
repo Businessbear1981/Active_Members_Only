@@ -8,8 +8,16 @@ interface GalleryImage {
   name: string
 }
 
-export default function RotatingGallery() {
-  const [images, setImages] = useState<GalleryImage[]>([])
+export default function RotatingGallery({
+  seedImage,
+  seedName,
+}: {
+  seedImage?: string
+  seedName?: string
+}) {
+  const [images, setImages] = useState<GalleryImage[]>(
+    seedImage ? [{ id: 'seed', url: seedImage, name: seedName ?? 'Art/Portal Room' }] : []
+  )
   const [index, setIndex] = useState(0)
 
   function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {

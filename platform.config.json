@@ -49,7 +49,7 @@
     { "slug": "marketplace",  "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Marketplace", "tagline": "Digital + physical merch, stems, presets, the label store.",     "status": "live" },
     { "slug": "club",         "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Club",       "tagline": "Public matching and discovery.",                                "status": "live" },
     { "slug": "lounge",       "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Lounge",     "tagline": "Activity feed, direct messages, connections.",                  "status": "coming-soon" },
-    { "slug": "restaurant",   "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Restaurant", "tagline": "Digital dining. Scope still being defined.",                    "status": "coming-soon" },
+    { "slug": "restaurant",   "parentSlug": null, "tier": "surface", "spaceType": "wing", "title": "The Restaurant", "tagline": "A rotating weekly AMO-branded menu via DoorDash Virtual Brands, prepared by local partner kitchens in each city.", "status": "coming-soon" },
 
     { "slug": "hip-hop",             "parentSlug": null,      "tier": "streets", "spaceType": "wing", "title": "Hip-Hop",              "tagline": "Genre room. Project rooms nested inside.",         "status": "live" },
     { "slug": "midnight-sessions",   "parentSlug": "hip-hop", "tier": "streets", "spaceType": "room", "title": "Midnight Sessions",    "tagline": "Project room — arranger, assets, A&R pipeline.",   "status": "live" },

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { platform } from '@/lib/config'
 import Concierge from '@/components/concierge/Concierge'
+import PortalTransitionProvider from '@/components/portal/PortalTransitionProvider'
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${platform.domain}`),
@@ -22,8 +23,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen bg-midnight text-ivory grain">
-        {children}
-        <Concierge />
+        <PortalTransitionProvider>
+          {children}
+          <Concierge />
+        </PortalTransitionProvider>
       </body>
     </html>
   )

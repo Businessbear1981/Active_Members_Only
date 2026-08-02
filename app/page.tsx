@@ -1,10 +1,24 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { platform } from '@/lib/config'
+import PortalLink from '@/components/portal/PortalLink'
 
 export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
+
+      {/* CSS smoke placeholder — swap for a real filmed 4K smoke loop
+          (mix-blend-mode: screen) once that asset exists */}
+      <div className="smoke-layer" />
+      <video
+        className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-70 pointer-events-none"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/brand/smoke-loop.mp4" type="video/mp4" />
+      </video>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">
@@ -29,12 +43,12 @@ export default function Home() {
         </div>
 
         {/* Enter — the only call to action on this screen */}
-        <Link
+        <PortalLink
           href="/surface"
           className="mt-2 px-10 py-3 border border-brass/60 text-brass text-xs tracking-[0.4em] uppercase hover:bg-brass/10 hover:text-white transition-colors"
         >
           Enter
-        </Link>
+        </PortalLink>
 
         <Link
           href="/gate/signed"

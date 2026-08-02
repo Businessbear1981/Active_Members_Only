@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { getSpacesByTier } from '@/lib/config'
 import { VIP_ROOM_IMAGES } from '@/lib/vipRoomImages'
+import PortalLink from '@/components/portal/PortalLink'
 
 export default function VipSanctumPage() {
   const vipSpaces = getSpacesByTier('vip')
@@ -26,10 +26,10 @@ export default function VipSanctumPage() {
         {vipSpaces.map(space => {
           const image = VIP_ROOM_IMAGES[space.slug]
           return (
-            <Link
+            <PortalLink
               key={space.slug}
               href={`/vip/${space.slug}`}
-              className="border border-vip-crimson/40 text-left hover:border-vip-amber transition-colors overflow-hidden group"
+              className="border border-vip-crimson/40 text-left hover:border-vip-amber transition-colors overflow-hidden group block"
             >
               {image && (
                 <div className="relative w-full aspect-[16/9]">
@@ -45,18 +45,18 @@ export default function VipSanctumPage() {
                 <p className="text-vip-amber text-xs tracking-widest uppercase">{space.title}</p>
                 <p className="text-vip-ivory/40 text-xs mt-2 leading-relaxed">{space.tagline}</p>
               </div>
-            </Link>
+            </PortalLink>
           )
         })}
       </div>
 
       <div className="text-center mt-14">
-        <Link
+        <PortalLink
           href="/surface"
           className="text-xs tracking-widest uppercase text-vip-ivory/30 hover:text-vip-amber transition-colors"
         >
           ← Back to the Surface
-        </Link>
+        </PortalLink>
       </div>
     </main>
   )

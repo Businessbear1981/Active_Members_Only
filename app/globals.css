@@ -57,3 +57,28 @@ html, body {
   border-left: 2px solid var(--accent);
   padding-left: 1rem;
 }
+
+/* Smoke atmosphere — CSS placeholder until a real filmed 4K smoke loop
+   replaces it (composited with mix-blend-mode: screen over black). */
+.smoke-layer {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0.35;
+  filter: blur(40px);
+  background:
+    radial-gradient(ellipse 40% 30% at 30% 60%, rgba(201,168,76,0.25), transparent 70%),
+    radial-gradient(ellipse 35% 40% at 70% 40%, rgba(245,240,232,0.15), transparent 70%),
+    radial-gradient(ellipse 30% 35% at 50% 80%, rgba(201,168,76,0.18), transparent 70%);
+  animation: smoke-drift 22s ease-in-out infinite alternate;
+}
+
+@keyframes smoke-drift {
+  0%   { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  50%  { transform: translate(3%, -4%) scale(1.15) rotate(4deg); }
+  100% { transform: translate(-4%, 3%) scale(1.05) rotate(-3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smoke-layer { animation: none; }
+}

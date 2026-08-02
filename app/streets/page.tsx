@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { getSpacesByTier } from '@/lib/config'
+import PortalLink from '@/components/portal/PortalLink'
 
 export default function StreetsPage() {
   const genreRooms = getSpacesByTier('streets')
@@ -47,12 +48,12 @@ export default function StreetsPage() {
       </div>
 
       <div className="text-center mt-14">
-        <Link
+        <PortalLink
           href="/surface"
           className="text-xs tracking-widest uppercase text-ivory/40 hover:text-streets-cyan transition-colors"
         >
           ← Back to the Surface
-        </Link>
+        </PortalLink>
       </div>
     </main>
   )

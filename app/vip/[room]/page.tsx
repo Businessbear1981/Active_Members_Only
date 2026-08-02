@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getSpace } from '@/lib/config'
 import { VIP_ROOM_IMAGES } from '@/lib/vipRoomImages'
+import PortalLink from '@/components/portal/PortalLink'
 
 export default async function VipRoomPage({ params }: { params: Promise<{ room: string }> }) {
   const { room } = await params
@@ -28,12 +28,12 @@ export default async function VipRoomPage({ params }: { params: Promise<{ room: 
         Room shell only — full functionality for {space.title} is a build item on the roadmap, not live yet.
       </div>
 
-      <Link
+      <PortalLink
         href="/vip"
         className="mt-10 text-xs tracking-widest uppercase text-vip-ivory/30 hover:text-vip-amber transition-colors"
       >
         ← All rooms
-      </Link>
+      </PortalLink>
     </main>
   )
 }

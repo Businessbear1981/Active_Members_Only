@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { platform, getSpacesByTier } from '@/lib/config'
+import PortalLink from '@/components/portal/PortalLink'
 
 export default function SurfacePage() {
   const surfaceSpaces = getSpacesByTier('surface')
@@ -24,14 +24,14 @@ export default function SurfacePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
           {surfaceSpaces.map(space =>
             space.status === 'live' ? (
-              <Link
+              <PortalLink
                 key={space.slug}
                 href={`/surface/${space.slug}`}
                 className="px-5 py-4 border border-brass/40 text-left hover:bg-brass/10 hover:border-brass transition-colors"
               >
                 <p className="text-brass text-sm tracking-widest uppercase">{space.title}</p>
                 <p className="text-ivory/50 text-xs mt-1">{space.tagline}</p>
-              </Link>
+              </PortalLink>
             ) : (
               <div
                 key={space.slug}
@@ -45,12 +45,12 @@ export default function SurfacePage() {
         </div>
 
         <nav className="flex flex-col sm:flex-row gap-4 mt-4">
-          <Link
+          <PortalLink
             href="/streets"
             className="px-8 py-3 border border-streets-purple/60 text-streets-purple text-sm tracking-widest uppercase hover:bg-streets-purple/10 transition-colors"
           >
             The Streets →
-          </Link>
+          </PortalLink>
         </nav>
 
       </div>

@@ -23,13 +23,14 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">
 
-        {/* SCO bust — framed like a museum object under glass */}
-        <div className="relative w-56 sm:w-72 aspect-square border border-brass/40 shadow-[0_0_60px_rgba(201,168,76,0.15)]">
+        {/* SCO bust — floating, no frame, cut out and glowing */}
+        <div className="relative w-[65vw] max-w-[720px]">
           <Image
-            src="/brand/sco-bust.jpg"
+            src="/brand/sco-bust-cutout.png"
             alt="SCO"
-            fill
-            className="object-cover"
+            width={1371}
+            height={1884}
+            className="w-full h-auto drop-shadow-[0_0_90px_rgba(201,168,76,0.4)]"
             priority
           />
         </div>
@@ -37,7 +38,6 @@ export default function Home() {
         {/* Brand */}
         <div className="flex flex-col items-center gap-3">
           <p className="text-xs tracking-[0.4em] uppercase brass opacity-80">{platform.shortName}</p>
-          <h1 className="text-4xl md:text-6xl font-serif tracking-wide">{platform.name}</h1>
           <p className="text-[11px] tracking-[0.5em] uppercase text-brass/70 font-mono">EST. MMXXVI</p>
           <p className="text-sm tracking-widest uppercase text-ivory/60 max-w-sm">{platform.tagline}</p>
         </div>

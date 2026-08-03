@@ -12,6 +12,8 @@ export interface Space {
   title: string
   tagline: string
   status: SpaceStatus
+  detail?: string
+  meta?: Record<string, string>
 }
 
 export interface Artist {

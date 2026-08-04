@@ -23,19 +23,20 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">
 
-        {/* SCO bust — floating, no frame, cut out and glowing.
-            Height-capped (not just width) so the tagline/Enter button below it
-            never gets clipped by the page's overflow-hidden on short viewports. */}
-        <div className="relative w-auto h-[42vh] max-h-[560px]">
+        {/* SCO bust — floating, no frame, cut out and glowing. The bust itself is
+            the entrance gate; height-capped (not just width) so the tagline/Enter
+            button below it never gets clipped by the page's overflow-hidden on
+            short viewports. */}
+        <PortalLink href="/surface" className="relative w-auto h-[42vh] max-h-[560px] group cursor-pointer">
           <Image
             src="/brand/sco-bust-cutout.png"
-            alt="SCO"
+            alt="Enter Active Members Only"
             width={1371}
             height={1884}
-            className="w-auto h-full drop-shadow-[0_0_90px_rgba(201,168,76,0.4)]"
+            className="w-auto h-full drop-shadow-[0_0_90px_rgba(201,168,76,0.4)] group-hover:drop-shadow-[0_0_130px_rgba(201,168,76,0.65)] transition-[filter] duration-300"
             priority
           />
-        </div>
+        </PortalLink>
 
         {/* Brand */}
         <div className="flex flex-col items-center gap-3">

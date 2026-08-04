@@ -5,7 +5,7 @@ import { concierge } from '@/lib/config'
 
 export default function Concierge() {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; text: string }[]>([
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; text: string; routed?: boolean }[]>([
     { role: 'assistant', text: concierge.greeting },
   ])
   const [input, setInput] = useState('')
@@ -26,7 +26,7 @@ export default function Concierge() {
     })
 
     const data = await res.json()
-    setMessages(m => [...m, { role: 'assistant', text: data.reply ?? '...' }])
+    setMessages(m => [...m, { role: 'assistant', text: data.reply ?? '...', routed: data.routedToHuman }])
     setLoading(false)
     setTimeout(() => inputRef.current?.focus(), 50)
   }
@@ -57,6 +57,9 @@ export default function Concierge() {
                 <p className={`text-sm leading-relaxed font-serif ${m.role === 'assistant' ? 'text-ivory/80' : 'text-brass'}`}>
                   {m.text}
                 </p>
+                {m.routed && (
+                  <p className="mt-1 text-[0.6rem] tracking-widest uppercase text-brass/60">→ Routing to the label</p>
+                )}
               </div>
             ))}
             {loading && (
@@ -72,7 +75,7 @@ export default function Concierge() {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && send()}
-              placeholder="Ask about a piece…"
+              placeholder="Ask the Concierge…"
               className="flex-1 bg-transparent text-ivory text-sm focus:outline-none placeholder-ivory/20"
             />
             <button

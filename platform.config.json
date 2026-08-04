@@ -53,6 +53,10 @@
 
     { "slug": "hip-hop",             "parentSlug": null,      "tier": "streets", "spaceType": "wing", "title": "Hip-Hop",              "tagline": "Genre room. Project rooms nested inside.",         "status": "live" },
     { "slug": "midnight-sessions",   "parentSlug": "hip-hop", "tier": "streets", "spaceType": "room", "title": "Midnight Sessions",    "tagline": "Project room — arranger, assets, A&R pipeline.",   "status": "live" },
+    { "slug": "rnb",                 "parentSlug": null,      "tier": "streets", "spaceType": "wing", "title": "R&B",                   "tagline": "Genre room. Project rooms nested inside.",         "status": "coming-soon" },
+    { "slug": "electronic",          "parentSlug": null,      "tier": "streets", "spaceType": "wing", "title": "Electronic",            "tagline": "Genre room. Project rooms nested inside.",         "status": "coming-soon" },
+    { "slug": "trap",                "parentSlug": null,      "tier": "streets", "spaceType": "wing", "title": "Trap",                  "tagline": "Genre room. Project rooms nested inside.",         "status": "coming-soon" },
+    { "slug": "pop",                 "parentSlug": null,      "tier": "streets", "spaceType": "wing", "title": "Pop",                   "tagline": "Genre room. Project rooms nested inside.",         "status": "coming-soon" },
 
     { "slug": "audio-room",    "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "Audio Room",          "tagline": "Highest-quality webcasting audio for private concerts.",          "status": "live" },
     { "slug": "video-room",    "parentSlug": null, "tier": "vip", "spaceType": "room",      "title": "Video Room",          "tagline": "Webcasting video for private concerts.",                          "status": "live" },

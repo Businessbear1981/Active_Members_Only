@@ -7,14 +7,30 @@ export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
 
-      {/* Animated background art — slow Ken Burns drift, dimmed so the bust and copy stay legible */}
-      <img src="/brand/home-backdrop.jpg" alt="" className="home-backdrop" aria-hidden="true" />
-      <div className="absolute inset-0 bg-black/55" />
+      {/* Animated background art — slow Ken Burns drift, dimmed so the bust and copy stay legible.
+          Inline styles (not the .home-backdrop CSS class) so this can't silently fail to paint
+          if a stylesheet fails to load — z-index is explicit at every layer here. */}
+      <img
+        src="/brand/home-backdrop.jpg"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: '-8%',
+          width: '116%',
+          height: '116%',
+          objectFit: 'cover',
+          opacity: 0.4,
+          zIndex: 0,
+          animation: 'backdrop-drift 40s ease-in-out infinite alternate',
+        }}
+      />
+      <div className="absolute inset-0 bg-black/50" style={{ zIndex: 1 }} />
 
       {/* CSS smoke placeholder — swap for a real filmed 4K smoke loop
           (mix-blend-mode: screen) once one is shot; no video file exists yet
           so there's nothing to reference here honestly. */}
-      <div className="smoke-layer" />
+      <div className="smoke-layer" style={{ zIndex: 2 }} />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { platform, getSpacesByTier } from '@/lib/config'
 import PortalLink from '@/components/portal/PortalLink'
 import SurfaceTileGrid from '@/components/surface/SurfaceTileGrid'
@@ -9,10 +8,6 @@ export default function SurfacePage() {
   return (
     <main className="relative min-h-screen bg-midnight flex flex-col items-center overflow-hidden px-6 py-20">
       <div className="relative z-10 flex flex-col items-center gap-10 text-center max-w-6xl w-full">
-
-        <div className="relative w-full aspect-[16/7] border border-brass/30 overflow-hidden">
-          <Image src="/brand/surface-hero.jpg" alt="The Surface" fill className="object-cover" priority />
-        </div>
 
         <div className="flex flex-col items-center gap-3">
           <p className="text-xs tracking-[0.4em] uppercase brass opacity-80">SURFACE</p>

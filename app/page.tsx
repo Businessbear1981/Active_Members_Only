@@ -23,14 +23,16 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">
 
-        {/* SCO bust — floating, no frame, cut out and glowing */}
-        <div className="relative w-[65vw] max-w-[720px]">
+        {/* SCO bust — floating, no frame, cut out and glowing.
+            Height-capped (not just width) so the tagline/Enter button below it
+            never gets clipped by the page's overflow-hidden on short viewports. */}
+        <div className="relative w-auto h-[42vh] max-h-[560px]">
           <Image
             src="/brand/sco-bust-cutout.png"
             alt="SCO"
             width={1371}
             height={1884}
-            className="w-full h-auto drop-shadow-[0_0_90px_rgba(201,168,76,0.4)]"
+            className="w-auto h-full drop-shadow-[0_0_90px_rgba(201,168,76,0.4)]"
             priority
           />
         </div>

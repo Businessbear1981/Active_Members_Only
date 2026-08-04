@@ -82,3 +82,23 @@ html, body {
 @media (prefers-reduced-motion: reduce) {
   .smoke-layer { animation: none; }
 }
+
+.home-backdrop {
+  position: absolute;
+  inset: -8%;
+  object-fit: cover;
+  width: 116%;
+  height: 116%;
+  opacity: 0.32;
+  filter: saturate(0.85);
+  animation: backdrop-drift 40s ease-in-out infinite alternate;
+}
+
+@keyframes backdrop-drift {
+  0%   { transform: scale(1) translate(0%, 0%); }
+  100% { transform: scale(1.08) translate(-1.5%, 1.5%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-backdrop { animation: none; }
+}

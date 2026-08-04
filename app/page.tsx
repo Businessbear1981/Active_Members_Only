@@ -7,18 +7,14 @@ export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
 
+      {/* Animated background art — slow Ken Burns drift, dimmed so the bust and copy stay legible */}
+      <img src="/brand/home-backdrop.jpg" alt="" className="home-backdrop" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/55" />
+
       {/* CSS smoke placeholder — swap for a real filmed 4K smoke loop
-          (mix-blend-mode: screen) once that asset exists */}
+          (mix-blend-mode: screen) once one is shot; no video file exists yet
+          so there's nothing to reference here honestly. */}
       <div className="smoke-layer" />
-      <video
-        className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-70 pointer-events-none"
-        autoPlay
-        muted
-        loop
-        playsInline
-      >
-        <source src="/brand/smoke-loop.mp4" type="video/mp4" />
-      </video>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">

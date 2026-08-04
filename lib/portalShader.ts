@@ -5,11 +5,11 @@ void main() {
 }
 `
 
-// Water-dive submersion + blacklight color burst. The overlay ramps to full
-// black opacity at the midpoint (swallowing the viewport — this is when the
-// actual route swap happens underneath), then fades back out to reveal the
-// new room. Rings are colored magenta/cyan/acid-green per the design brief's
-// universal transition treatment.
+// Swirling-water dive. A vortex distortion spins the viewport around its center
+// while concentric caustic rings ripple outward, in deep-water navy/teal shading
+// to gold highlights (AMO's brass) — no neon blacklight burst. The overlay still
+// ramps to full black/water opacity at the midpoint (when the actual route swap
+// happens underneath), then fades back out to reveal the new room.
 const FRAGMENT_SRC = `
 precision mediump float;
 uniform float u_time; // 0..1 progress through the jump
@@ -25,30 +25,35 @@ void main() {
   float dist = length(uv);
   float angle = atan(uv.y, uv.x);
 
-  // envelope: 0 -> 1 -> 0, black coverage peaks at the midpoint
+  // envelope: 0 -> 1 -> 0, full water coverage peaks at the midpoint
   float envelope = smoothstepf(0.0, 0.35, u_time) * (1.0 - smoothstepf(0.65, 1.0, u_time));
+  float spin = smoothstepf(0.0, 0.9, u_time);
 
-  // ripple distortion — settles as the dive progresses (water-surface break)
-  float rippleAmp = 0.06 * (1.0 - u_time);
-  float ripple = sin(dist * 18.0 - u_time * 14.0) * rippleAmp;
-  float d = dist + ripple;
+  // vortex: swirl strengthens toward the center and eases in/out across the jump
+  float swirl = (1.2 / (dist + 0.25)) * spin * (1.0 - spin) * 4.0;
+  float swirledAngle = angle + swirl + u_time * 2.2;
 
-  // expanding burst ring
-  float burstRadius = u_time * 1.5;
-  float ring = smoothstepf(0.18, 0.0, abs(d - burstRadius));
+  // layered caustic ripples — the "swirling water" texture
+  float c1 = sin(dist * 16.0 - u_time * 10.0 + sin(swirledAngle * 3.0) * 1.6);
+  float c2 = sin(dist * 9.0 + swirledAngle * 4.0 - u_time * 6.0);
+  float caustic = (c1 * 0.6 + c2 * 0.4);
+  float causticGlow = smoothstepf(0.35, 1.0, caustic);
 
-  vec3 magenta = vec3(1.0, 0.18, 0.82);
-  vec3 cyan    = vec3(0.13, 0.94, 1.0);
-  vec3 acid    = vec3(0.78, 1.0, 0.18);
+  // deep water navy/teal, brightening to brass gold at caustic peaks
+  vec3 deepWater  = vec3(0.02, 0.07, 0.11);
+  vec3 teal       = vec3(0.05, 0.35, 0.42);
+  vec3 gold       = vec3(0.79, 0.66, 0.30);
 
-  float mixer = sin(angle * 3.0 + u_time * 6.0) * 0.5 + 0.5;
-  vec3 burstColor = mix(magenta, cyan, mixer);
-  float acidMix = smoothstepf(0.6, 1.0, sin(angle * 5.0 - u_time * 4.0) * 0.5 + 0.5);
-  burstColor = mix(burstColor, acid, acidMix);
+  vec3 waterColor = mix(deepWater, teal, smoothstepf(0.0, 1.0, dist + caustic * 0.15));
+  waterColor = mix(waterColor, gold, causticGlow * 0.5);
 
-  vec3 finalColor = burstColor * ring * envelope * 1.6;
+  // radial vignette so the swirl reads as a submersion, not a flat overlay
+  float vignette = 1.0 - smoothstepf(0.15, 1.1, dist);
+  vec3 finalColor = mix(deepWater * 0.6, waterColor, vignette);
 
-  gl_FragColor = vec4(finalColor, envelope);
+  float alpha = envelope * mix(0.85, 1.0, causticGlow);
+
+  gl_FragColor = vec4(finalColor * envelope * 1.4, alpha);
 }
 `
 

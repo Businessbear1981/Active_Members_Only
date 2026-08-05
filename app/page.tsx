@@ -7,7 +7,9 @@ export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
 
-      {/* Animated background art — slow Ken Burns drift, dimmed so the bust and copy stay legible.
+      {/* Animated background art — the Detroit backdrop IS the background, not a faint hint
+          under black. Slow Ken Burns drift; only a light gradient (heavier at the very top/bottom
+          for text legibility, near-clear through the middle) sits over it — no flat black scrim.
           Inline styles (not the .home-backdrop CSS class) so this can't silently fail to paint
           if a stylesheet fails to load — z-index is explicit at every layer here. */}
       <img
@@ -20,12 +22,18 @@ export default function Home() {
           width: '116%',
           height: '116%',
           objectFit: 'cover',
-          opacity: 0.4,
+          opacity: 0.85,
           zIndex: 0,
           animation: 'backdrop-drift 40s ease-in-out infinite alternate',
         }}
       />
-      <div className="absolute inset-0 bg-black/50" style={{ zIndex: 1 }} />
+      <div
+        className="absolute inset-0"
+        style={{
+          zIndex: 1,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0.6) 100%)',
+        }}
+      />
 
       {/* CSS smoke placeholder — swap for a real filmed 4K smoke loop
           (mix-blend-mode: screen) once one is shot; no video file exists yet

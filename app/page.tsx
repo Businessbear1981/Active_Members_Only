@@ -60,7 +60,7 @@ export default function Home() {
 
         {/* Brand */}
         <div className="flex flex-col items-center gap-3">
-          <p className="text-xs tracking-[0.4em] uppercase brass opacity-80">{platform.shortName}</p>
+          <p className="text-sm tracking-[0.4em] uppercase brass opacity-100 drop-shadow-[0_0_18px_rgba(201,168,76,0.5)]">{platform.shortName}</p>
           <p className="text-[11px] tracking-[0.5em] uppercase text-brass/70 font-mono">EST. MMXXVI</p>
           <p className="text-sm tracking-widest uppercase text-ivory/60 max-w-sm">{platform.tagline}</p>
         </div>

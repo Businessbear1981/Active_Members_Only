@@ -5,7 +5,7 @@ import PortalLink from '@/components/portal/PortalLink'
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
+    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
 
       {/* Animated background art — the Detroit backdrop IS the background, not a faint hint
           under black. Slow Ken Burns drift; only a light gradient (heavier at the very top/bottom
@@ -22,7 +22,7 @@ export default function Home() {
           width: '116%',
           height: '116%',
           objectFit: 'cover',
-          opacity: 0.85,
+          opacity: 1,
           zIndex: 0,
           animation: 'backdrop-drift 40s ease-in-out infinite alternate',
         }}
@@ -31,7 +31,7 @@ export default function Home() {
         className="absolute inset-0"
         style={{
           zIndex: 1,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0.6) 100%)',
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.45) 100%)',
         }}
       />
 

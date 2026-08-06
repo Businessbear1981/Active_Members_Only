@@ -41,8 +41,10 @@ export default function Home() {
           so there's nothing to reference here honestly. */}
       <div className="smoke-layer" style={{ zIndex: 2 }} />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center">
+      {/* Content — shifted up so the SCO head lands on the mural's own vanishing
+          point (the archway converges above true vertical center), not just
+          centered in the viewport. */}
+      <div className="relative z-10 flex flex-col items-center gap-10 px-6 text-center -translate-y-[10%]">
 
         {/* SCO bust — floating, no frame, cut out and glowing. The bust itself is
             the entrance gate; height-capped (not just width) so the tagline/Enter
@@ -60,7 +62,7 @@ export default function Home() {
         </PortalLink>
 
         {/* Brand */}
-        <div className="flex flex-col items-center gap-3 px-8 py-4 rounded-sm" style={{ background: 'rgba(10,10,18,0.45)', backdropFilter: 'blur(2px)' }}>
+        <div className="flex flex-col items-center gap-3">
           <p
             className="text-sm tracking-[0.4em] uppercase font-serif"
             style={{
@@ -68,13 +70,13 @@ export default function Home() {
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
-              filter: 'drop-shadow(0 1px 0 rgba(0,0,0,0.6)) drop-shadow(0 0 14px rgba(201,168,76,0.55))',
+              filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.85)) drop-shadow(0 0 16px rgba(201,168,76,0.6)) drop-shadow(0 0 30px rgba(0,0,0,0.6))',
             }}
           >
             {platform.shortName}
           </p>
-          <p className="text-[11px] tracking-[0.5em] uppercase text-brass/70 font-mono">EST. MMXXVI</p>
-          <p className="text-sm tracking-widest uppercase text-ivory/70 max-w-sm drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">{platform.tagline}</p>
+          <p className="text-[11px] tracking-[0.5em] uppercase text-brass/70 font-mono drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">EST. MMXXVI</p>
+          <p className="text-sm tracking-widest uppercase text-ivory/80 max-w-sm drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">{platform.tagline}</p>
         </div>
 
         {/* Enter — the only call to action on this screen */}

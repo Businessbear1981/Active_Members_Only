@@ -45,12 +45,15 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Streets: requires a signed-in member (premium+ tier check lands once subscriptions are wired to Supabase)
-  if (request.nextUrl.pathname.startsWith('/streets')) {
-    if (!user) {
-      return NextResponse.redirect(new URL('/gate/signed', request.url))
-    }
-  }
+  // Streets: TEMPORARILY OPEN. There is no real sign-in flow yet (/gate/signed is a
+  // request-access form, not a login page) — gating this meant it was 100% unreachable
+  // by anyone, including us. Re-enable once real Supabase auth exists to pass the gate.
+  //
+  // if (request.nextUrl.pathname.startsWith('/streets')) {
+  //   if (!user) {
+  //     return NextResponse.redirect(new URL('/gate/signed', request.url))
+  //   }
+  // }
 
   // VIP Sanctum: requires a signed-in member (vip/label_signed tier check lands once subscriptions are wired to Supabase)
   if (request.nextUrl.pathname.startsWith('/vip')) {
@@ -63,5 +66,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/provenance/:path*', '/admin/:path*', '/streets/:path*', '/vip/:path*'],
+  matcher: ['/provenance/:path*', '/admin/:path*', '/vip/:path*'],
 }

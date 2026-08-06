@@ -18,10 +18,11 @@ export default function Home() {
         aria-hidden="true"
         style={{
           position: 'absolute',
-          inset: '-8%',
-          width: '116%',
-          height: '116%',
+          inset: '-1%',
+          width: '102%',
+          height: '102%',
           objectFit: 'cover',
+          objectPosition: 'center',
           opacity: 1,
           zIndex: 0,
           animation: 'backdrop-drift 40s ease-in-out infinite alternate',
@@ -59,10 +60,21 @@ export default function Home() {
         </PortalLink>
 
         {/* Brand */}
-        <div className="flex flex-col items-center gap-3">
-          <p className="text-sm tracking-[0.4em] uppercase brass opacity-100 drop-shadow-[0_0_18px_rgba(201,168,76,0.5)]">{platform.shortName}</p>
+        <div className="flex flex-col items-center gap-3 px-8 py-4 rounded-sm" style={{ background: 'rgba(10,10,18,0.45)', backdropFilter: 'blur(2px)' }}>
+          <p
+            className="text-sm tracking-[0.4em] uppercase font-serif"
+            style={{
+              background: 'linear-gradient(180deg, #f5f0e8 0%, #e8d9a8 45%, #c9a84c 55%, #f5f0e8 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              filter: 'drop-shadow(0 1px 0 rgba(0,0,0,0.6)) drop-shadow(0 0 14px rgba(201,168,76,0.55))',
+            }}
+          >
+            {platform.shortName}
+          </p>
           <p className="text-[11px] tracking-[0.5em] uppercase text-brass/70 font-mono">EST. MMXXVI</p>
-          <p className="text-sm tracking-widest uppercase text-ivory/60 max-w-sm">{platform.tagline}</p>
+          <p className="text-sm tracking-widest uppercase text-ivory/70 max-w-sm drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">{platform.tagline}</p>
         </div>
 
         {/* Enter — the only call to action on this screen */}

@@ -27,8 +27,8 @@ export default function RoomHero({
     <div className={`relative w-full aspect-[21/9] md:aspect-[21/7] overflow-hidden ${image ? 'bg-midnight' : `bg-gradient-to-br ${gradient}`} border-b border-brass/20`}>
       {image && (
         <>
-          <Image src={image} alt={title} fill className="object-cover opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/70 to-midnight/30" />
+          <Image src={image} alt={title} fill className="object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/10 to-transparent" />
         </>
       )}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(201,168,76,0.12),transparent_60%)]" />
